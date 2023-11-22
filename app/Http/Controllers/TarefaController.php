@@ -15,7 +15,7 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        return Tarefa::all();
+        return response()->json(Tarefa::all());
     }
 
     /**
@@ -27,7 +27,8 @@ class TarefaController extends Controller
     public function store(Request $request)
     {
 
-        return Tarefa::create($request->all());
+        $tarefa = Tarefa::create($request->all());
+        return response()->json($tarefa,201);
     }
 
     /**
@@ -38,7 +39,7 @@ class TarefaController extends Controller
      */
     public function show($id)
     {
-        return Tarefa::find($id);
+        return response()->json(Tarefa::find($id));
     }
 
     /**

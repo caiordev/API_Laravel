@@ -16,7 +16,7 @@ class TarefaControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_tarefa_get_endpoint()
+    public function test_get_tarefas_endpoint()
     {
         $tarefas = Tarefa::factory(3)->create();
         $response = $this->getJson('/api/tarefa');
@@ -42,4 +42,60 @@ class TarefaControllerTest extends TestCase
             ]);
         });
     }
-}
+
+      /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_get_single_tarefa_endpoint()
+    {
+        $tarefa = Tarefa::factory(1)->createOne();
+        $response = $this->getJson('/api/tarefa/'. $tarefa->id);
+
+        $response->assertStatus(200);
+
+
+        $response->assertJson(function (AssertableJson $json) use($tarefa){
+            $json->whereAllType([
+                'id'=> 'integer',
+                'titulo'=> 'string',
+                'descricao'=> 'string',
+                'status'=> 'string'
+            ]);
+
+            $json->hasAll(['id', 'titulo', 'descricao', 'status', 'created_at', 'updated_at']);
+
+            $json->whereAll([
+                'id' => $tarefa->id,
+                'titulo'=>$tarefa->titulo,
+                'descricao'=>$tarefa->descricao,
+                'status'=>$tarefa->status,
+            ]);
+        });
+    }
+
+        public function test_post_tarefa_endpoint()
+        {
+            $tarefa = Tarefa::factory(1)->makeOne()->toArray();
+
+
+            $response = $this->postJson('/api/tarefa', $tarefa);
+
+            $response->assertStatus(201);
+
+            $response->assertJson(function (AssertableJson $json) use($tarefa){
+                $json->hasAll(['id', 'titulo', 'descricao', 'status', 'created_at', 'updated_at']);
+                $json->whereAll([
+                    'titulo'=>$tarefa['titulo'],
+                    'descricao'=>$tarefa['descricao'],
+                    'status'=>$tarefa['status'],
+                ])->etc();
+            });
+
+        }
+    }
+
+
+
+
