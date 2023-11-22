@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->string('descricao');
-            $table->boolean('status');
+            $table->string('status');
             $table->timestamps();
         });
     }
