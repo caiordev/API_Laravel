@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tarefa;
+use App\Http\Controllers\Exception;
 use Illuminate\Http\Request;
 
 class TarefaController extends Controller
@@ -15,8 +16,12 @@ class TarefaController extends Controller
      */
     public function index()
     {
+        try{
         return response()->json(Tarefa::all());
+        }catch(Exception $e){
+            return response()->json(['error'=>$e->getMessage()], 500);
     }
+}
 
     /**
      * Store a newly created resource in storage.
@@ -51,9 +56,10 @@ class TarefaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tarefa = Tarefa::findOrfail($id);
+
+        $tarefa = Tarefa::find($id);
         $tarefa->update($request->all());
-        return $tarefa;
+        return response()->json($tarefa);
     }
 
     /**
@@ -64,6 +70,9 @@ class TarefaController extends Controller
      */
     public function destroy($id)
     {
-        return Tarefa::destroy($id);
+        $tarefa = Tarefa::find($id);
+        $tarefa->delete();
+        return response()->json([], 204);
     }
+
 }

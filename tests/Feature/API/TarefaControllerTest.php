@@ -94,6 +94,41 @@ class TarefaControllerTest extends TestCase
             });
 
         }
+
+        public function test_put_tarefa_endpoint()
+        {
+            Tarefa::factory(1)->createOne();
+            $tarefa = [
+                'titulo'=>'Atualizando livro...',
+                'descricao'=>'Atualizando livro...',
+                'status'=>'Atualizando livro...'
+            ];
+
+            $response = $this->putJson('/api/tarefa/1', $tarefa);
+
+            $response->assertStatus(200);
+
+            $response->assertJson(function (AssertableJson $json) use($tarefa){
+                $json->hasAll(['id', 'titulo', 'descricao', 'status', 'created_at', 'updated_at']);
+                $json->whereAll([
+                    'titulo'=>$tarefa['titulo'],
+                    'descricao'=>$tarefa['descricao'],
+                    'status'=>$tarefa['status'],
+                ])->etc();
+            });
+
+
+
+        }
+
+        public function test_delete_tarefa_endpoint()
+        {
+            Tarefa::factory(1)->createOne();
+            $response = $this->deleteJson('/api/tarefa/1');
+
+            $response->assertStatus(204);
+
+        }
     }
 
 
