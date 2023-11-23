@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\TarefaRequest;
 use App\Models\Tarefa;
 use App\Http\Controllers\Exception;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class TarefaController extends Controller
         try{
         return response()->json(Tarefa::all());
         }catch(Exception $e){
-            return response()->json(['error'=>$e->getMessage()], 500);
+            return response()->json(['error'=>$e->getMessage()], 400);
     }
 }
 
@@ -29,11 +30,15 @@ class TarefaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TarefaRequest $request)
     {
-
-        $tarefa = Tarefa::create($request->all());
-        return response()->json($tarefa,201);
+        try {
+            $tarefa = Tarefa::create($request->all());
+            return response()->json($tarefa, 201);
+        } catch (\Exception $e) {
+            // Tratamento de erro genérico
+            return response()->json(['error' => 'Ocorreu um erro ao criar a tarefa.'], 422);
+        }
     }
 
     /**
@@ -74,5 +79,21 @@ class TarefaController extends Controller
         $tarefa->delete();
         return response()->json([], 204);
     }
+
+
+    /**
+ * Update the status of the specified resource in storage.
+ *
+ * @param \Illuminate\Http\Request $request
+ * @param int $id
+ * @return \Illuminate\Http\Response
+ */
+public function updateStatus(Request $request, $id)
+{
+   $tarefa = Tarefa::find($id);
+   $tarefa->status = $request->status;
+   $tarefa->save();
+   return response()->json($tarefa);
+}
 
 }

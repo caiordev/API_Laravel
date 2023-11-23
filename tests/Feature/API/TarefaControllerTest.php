@@ -94,6 +94,19 @@ class TarefaControllerTest extends TestCase
             });
 
         }
+    public function test_post_tarefa_should_validate_when_try_create_a_invalid_book()
+        {
+
+
+             $response = $this->postJson('/api/tarefa', []);
+
+            $response->assertStatus(422);
+
+             $response->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message', 'errors']);
+                $json->where('errors.titulo.0', 'Este campo é obrigatório');
+            });
+}
 
         public function test_put_tarefa_endpoint()
         {
