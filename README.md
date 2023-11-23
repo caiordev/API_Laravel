@@ -4,12 +4,13 @@
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
 
-Este projeto é uma API para o teste da Inforgeneses usando **PHP, Laravel, MySQL as the database.**
+Este projeto é uma API para o teste da Inforgeneses usando **PHP, Laravel, MySQL**
 
 Esta API foi criada seguindo os passos do TDD e clean code, com testes de todos os endpoints. A API inclue:
--Testes funcionais✅
--Validação de entrada✅
--Commits utilizando a Conventional Commits Pattern✅
+
+-   Testes funcionais✅
+-   Validação de entrada✅
+-   Commits utilizando a Conventional Commits Pattern✅
 
 ## Tabela de Conteúdos
 
@@ -36,8 +37,8 @@ composer install
 
 ## Database
 
-Este projeto utiliza o [MySQL](https://www.h2database.com/html/tutorial.html) como o banco de dados:
--No arquivo .env defina o nome do banco de dados.
+Este projeto utiliza o [MySQL](https://www.h2database.com/html/tutorial.html) como o banco de dados:  
+-No arquivo .env defina o nome do banco de dados.  
 -Configure a senha e usuário do seu MySQL.
 
 Rode as migrações com:
