@@ -29,7 +29,14 @@ Esta API foi criada seguindo os passos do TDD e clean code, com testes de todos 
 git clone https://github.com/caiordev/API_Laravel.git
 ```
 
+2. Vá para o diretório:
+
+```bash
+cd API_Laravel
+```
+
 2. Instale as dependências com:
+   \*Necessário ter o [composer](https://getcomposer.org/download/) instalado.
 
 ```bash
 composer install
