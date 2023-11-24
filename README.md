@@ -54,6 +54,12 @@ Rode as migrações com:
 php artisan migrate
 ```
 
+Rode as seeds com:
+
+```bash
+php artisan db:seed
+```
+
 ## USO
 
 1. Comece a aplicação com o artisan:
@@ -87,15 +93,7 @@ GET /tarefa - Retorna uma lista de todas as tarefas.
     {
         "id": 1,
         "titulo": "fazer atividade",
-        "decricao": "fazer atividade de matemática",
-        "status": false,
-        "created_at": "2023-11-22T23:17:46.000000Z",
-        "updated_at": "2023-11-23T15:58:46.000000Z"
-    },
-    {
-        "id": 2,
-        "titulo": "ler um livro",
-        "decricao": "ler o livro do Game Of Thrones",
+        "descricao": "fazer atividade de matemática",
         "status": false,
         "created_at": "2023-11-22T23:17:46.000000Z",
         "updated_at": "2023-11-23T15:58:46.000000Z"
