@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+//Todas as rotas do crud.
 Route::post('/tarefa',[TarefaController::class, 'store'] );
-
 Route::get('/tarefa',[TarefaController::class, 'index'] );
 Route::get('/tarefa/{id}',[TarefaController::class, 'show'] );
 Route::put('/tarefa/{id}',[TarefaController::class, 'update'] );
 Route::delete('/tarefa/{id}',[TarefaController::class, 'destroy'] );
+//Rota para atualizar apenas o status *poderia ser um patch*
 Route::put('/tarefa/{id}/status',[TarefaController::class,'updateStatus'] );
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

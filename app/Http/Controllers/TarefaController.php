@@ -15,6 +15,8 @@ class TarefaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Retorna todas as tarefas e verifica de deu sucesso ou falha.
     public function index()
     {
         try{
@@ -30,6 +32,7 @@ class TarefaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //Usa o TarefaRequest que é uma camada a mais para fazer a validação do dado.
     public function store(TarefaRequest $request)
     {
         try {
@@ -47,6 +50,7 @@ class TarefaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //Mostra uma tarefa específica.
     public function show($id)
     {
         return response()->json(Tarefa::find($id));
@@ -75,9 +79,18 @@ class TarefaController extends Controller
      */
     public function destroy($id)
     {
-        $tarefa = Tarefa::find($id);
-        $tarefa->delete();
-        return response()->json([], 204);
+       try {
+          $tarefa = Tarefa::find($id);
+          if (!$tarefa) {
+             throw new \Exception("Tarefa não encontrada");
+          }
+
+          $tarefa->delete();
+
+          return response()->json([], 204);
+       } catch (\Exception $e) {
+          return response()->json(['error' => $e->getMessage()], 400);
+       }
     }
 
 
@@ -88,12 +101,22 @@ class TarefaController extends Controller
  * @param int $id
  * @return \Illuminate\Http\Response
  */
+//Atualiza o status da tarefa.
 public function updateStatus(Request $request, $id)
 {
-   $tarefa = Tarefa::find($id);
-   $tarefa->status = $request->status;
-   $tarefa->save();
-   return response()->json($tarefa);
+   try {
+      $tarefa = Tarefa::find($id);
+      if (!$tarefa) {
+         throw new \Exception("Tarefa não encontrada");
+      }
+
+      $tarefa->status = $request->status;
+      $tarefa->save();
+
+      return response()->json($tarefa);
+   } catch (\Exception $e) {
+      return response()->json(['error' => $e->getMessage()], 400);
+   }
 }
 
 }

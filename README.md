@@ -37,7 +37,7 @@ composer install
 
 ## Database
 
-Este projeto utiliza o [MySQL](https://www.h2database.com/html/tutorial.html) como o banco de dados:  
+Este projeto utiliza o [MySQL](https://docs.oracle.com/en-us/iaas/mysql-database/doc/getting-started.html) como o banco de dados:  
 -No arquivo .env defina o nome do banco de dados.  
 -Configure a senha e usuário do seu MySQL.
 
@@ -55,7 +55,7 @@ php artisan migrate
 php artisan serve
 ```
 
-2. A API poderá ser acessada em http://127.0.0.1:8000
+2. A API poderá ser acessada em http://127.0.0.1:8000 (lembrando que é preciso adicionar /api antes da rota)
 
 ## TESTES
 
