@@ -14,14 +14,13 @@ Esta API foi criada seguindo os passos do TDD e clean code, com testes de todos 
 
 ## Tabela de Conteúdos
 
--   [Instalação](#installation)
--   [Configuração](#configuration)
--   [Uso](#usage)
+-   [Instalação](#Instalação)
+-   [Banco de Dados](#BancodeDados)
+-   [Uso](#Uso)
+-   [Teste](#Testes)
 -   [API Endpoints](#api-endpoints)
--   [Banco de Dados](#database)
--   [Contributing](#contributing)
 
-## Installation
+## Instalação
 
 1. Clone o repositório:
 
@@ -42,7 +41,7 @@ cd API_Laravel
 composer install
 ```
 
-## Database
+## Banco de Dados
 
 Este projeto utiliza o [MySQL](https://docs.oracle.com/en-us/iaas/mysql-database/doc/getting-started.html) como o banco de dados:  
 -No arquivo .env defina o nome do banco de dados.  
